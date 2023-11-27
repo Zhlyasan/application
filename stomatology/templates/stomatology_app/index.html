@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<title>Главная - Доска объявлений</title>
+</head>
+<body>
+	<h1>Доктора и их записи:</h1>
+		{% for doc in docs %}
+			<div>
+				<h2>{{ doc.name }} {{ doc.surname }}</h2>
+			</div>
+			{% for session in sessions %}
+				{% if doc.name == session.doctor.name %}
+					<div>
+						<p> Время сеанса: {{ session.date_time }} Пациент: {{ session.patient.name }} {{ session.patient.surname }} {{ work.name }}</p>
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+<!--	{% for session in sessions %}-->
+<!--		<div>-->
+<!--			<p>{{ session.date_time }}</p>-->
+<!--			<p>{{ session.doctor.name }}</p>-->
+<!--		</div>-->
+<!--	{% endfor %}-->
+</body>
+</html>
