@@ -4,8 +4,59 @@
 	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 	<title>Главная - Доска объявлений</title>
 </head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            color: #444;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #1e90ff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 0;
+            color: #333;
+        }
+
+        .session {
+            margin-left: 20px;
+            border-left: 2px solid #1e90ff;
+            padding-left: 10px;
+        }
+
+        .worklist {
+            margin-left: 40px;
+            color: #666;
+        }
+    </style>
 <body>
 	<h1>Доктора и их записи:</h1>
+<!--		{% for session in sessions%}-->
+<!--			{% for doc in session.doctors.all %}-->
+<!--				<div>-->
+<!--					<h2>{{ doc.name }} </h2>-->
+<!--				</div>-->
+<!--			{% endfor %}-->
+<!--			{% for work in session.worklists.all %}-->
+<!--				<div>-->
+<!--					<h2>{{ work.name }} </h2>-->
+<!--				</div>-->
+<!--			{% endfor %}-->
+<!--		{% endfor %}-->
 		{% for doc in docs %}
 			<div>
 				<h2>{{ doc.name }} {{ doc.surname }}</h2>
@@ -13,16 +64,15 @@
 			{% for session in sessions %}
 				{% if doc.name == session.doctor.name %}
 					<div>
-						<p> Время сеанса: {{ session.date_time }} Пациент: {{ session.patient.name }} {{ session.patient.surname }} {{ work.name }}</p>
+						<p> Время сеанса: {{ session.date_time }} Пациент: {{ session.patient.name }} {{ session.patient.surname }}</p>
 					</div>
+					{% for work in session.worklists.all  %}
+						<div>
+							<p> Проведенная работа: {{ work.name }}</p>
+						</div>
+					{% endfor %}
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
-<!--	{% for session in sessions %}-->
-<!--		<div>-->
-<!--			<p>{{ session.date_time }}</p>-->
-<!--			<p>{{ session.doctor.name }}</p>-->
-<!--		</div>-->
-<!--	{% endfor %}-->
 </body>
 </html>
